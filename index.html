@@ -44,39 +44,41 @@
   }
 
   test = function test(assertionFunction, assertionText) {
-    var log = document.getElementById("log"),
-        logLine = document.createElement("p"),
-        passed = assertionFunction(),
-        logMessage = assertionText + ": " + (passed ? "✓" : "✘");
-    logLine.textContent = logMessage;
-    log.appendChild(logLine);
+    window.addEventListener("load", function(){
+      var log = document.getElementById("log"),
+          logLine = document.createElement("p"),
+          passed = assertionFunction(),
+          logMessage = assertionText + ": " + (passed ? "✓" : "✘");
+      logLine.textContent = logMessage;
+      log.appendChild(logLine);
+    });
   }
 
   test(function() {
-    assert_undefined(loads_scripts_with_badly_encoded_digest)
+    return assert_undefined(loads_scripts_with_badly_encoded_digest)
   }, "Doesn't load scripts with badly encoded digests");
 
   test(function() {
-    assert_true(loads_scripts_with_correct_content_type)
+    return assert_true(loads_scripts_with_correct_content_type)
   }, "Loads scripts with correct content type");
 
   test(function() {
-    assert_undefined(loads_scripts_with_improper_integrity_uri_scheme)
+    return assert_undefined(loads_scripts_with_improper_integrity_uri_scheme)
   }, "Doesn't load scripts with improper integrity URI scheme");
 
   test(function() {
-    assert_undefined(loads_scripts_with_incorrect_content_type)
+    return assert_undefined(loads_scripts_with_incorrect_content_type)
   }, "Doesn't load scripts with incorrect content-type");
 
   test(function() {
-    assert_true(loads_scripts_with_matching_digest)
+    return assert_true(loads_scripts_with_matching_digest)
   }, "Loads scripts with matching digest");
 
   test(function() {
-    assert_undefined(loads_scripts_with_non_matching_digest)
+    return assert_undefined(loads_scripts_with_non_matching_digest)
   }, "Doesn't load scripts with non-matching digest");
 
   test(function() {
-    assert_undefined(loads_scripts_with_weak_digest_algorithms)
+    return assert_undefined(loads_scripts_with_weak_digest_algorithms)
   }, "Doesn't load scripts using weak digest algorithm");
 </script>
