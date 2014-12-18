@@ -1,1 +1,1 @@
-loads_scripts_with_base___encoded_sha_digest=true;
+loads_scripts_with_base64_encoded_sha_digest=true;

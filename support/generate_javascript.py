@@ -36,7 +36,7 @@ def main():
   for file in js_files():
     print "Generating content for %s" % file
     base = path.splitext(path.basename(file))[0]
-    var_name = re.sub(r"[^a-z]", "_", base)
+    var_name = re.sub(r"[^a-z0-9]", "_", base)
     content = "%s=true;" % var_name
     with open(file, "w") as f: f.write(content)
     print "\tSHA256 integrity: %s" % sha256_uri(content)
