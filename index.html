@@ -11,6 +11,7 @@
   var loads_scripts_with_non_matching_digest;
   var loads_scripts_with_weak_digest_algorithms;
   var loads_scripts_with_base64_encoded_sha_digests;
+  var loads_scripts_with_unhyphenated_digest_name;
 </script>
 
 <!-- Should load -->
@@ -33,6 +34,9 @@
 
 <!-- Should load -->
 <script src="loads-scripts-with-base64-encoded-sha-digest.js" integrity="ni:///sha-256;Ah0haOJHZOHKk3dQ1NxHV4I4yMO0jY2b2jibASsYr6w"></script>
+
+<!-- Should load -->
+<script src="loads-scripts-with-unhyphenated-digest-name.js" integrity="ni:///sha256;ZR6E3E_G_B3WNdop4bYFtnXaj5bH02S3znD__KOC8Io"></script>
 
 <script>
   assert_true = function assert_true(value) {
@@ -81,4 +85,8 @@
   test(function() {
     return assert_true(loads_scripts_with_base64_encoded_sha_digests)
   }, "Loads scripts with base64 encoded sha digests");
+
+  test(function() {
+    return assert_true(loads_scripts_with_unhyphenated_digest_name)
+  }, "Loads scripts with unhyphenated digest names");
 </script>
