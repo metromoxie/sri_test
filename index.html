@@ -4,9 +4,7 @@
 <div id="log"></div>
 
 <script>
-  var loads_scripts_with_correct_content_type;
   var loads_scripts_with_improper_integrity_uri_scheme;
-  var loads_scripts_with_incorrect_content_type;
   var loads_scripts_with_matching_digest;
   var loads_scripts_with_multiple_digests_and_one_is_wrong;
   var loads_scripts_with_non_matching_digest;
@@ -15,17 +13,8 @@
   var loads_scripts_with_unhyphenated_digest_name;
 </script>
 
-<!-- Should load -->
-<script src="loads-scripts-with-correct-content-type.js" integrity="sha256-ZrrvOG-Kjz4R-FDFrfSQCQC_oMDfc0kQ3DJNd5URlrY"></script>
-
-<!-- Should load since at least one hash matches -->
-<script src="loads-scripts-with-correct-content-type.js" integrity="sha256-ZrrvOG-Kjz4R-FDFrfSQCQC_oMDfc0kQ3DJNd5URlrY sha512-deadbeef"></script>
-
 <!-- Should load because the algorithm is unknown, but potentially with a console error -->
 <script src="loads-scripts-with-improper-integrity-uri-scheme.js" integrity="shaa256-J9PNsSFLX168LnQhGZeryaLZDmTLy_fMdx4pO-LhjW4"></script>
-
-<!-- Shouldn't load. Correct hash is ni:///sha-256;LiWoBTgUHmhVG6gn0dO9R0lBEItHgny2pnvLtBOc0tI?ct=application/javascript -->
-<script src="loads-scripts-with-incorrect-content-type.js" integrity="ni:///sha-256;LiWoBTgUHmhVG6gn0dO9R0lBEItHgny2pnvLtBOc0tI?ct=text/plain"></script>
 
 <!-- Should load -->
 <script src="loads-scripts-with-matching-digest.js"
@@ -67,16 +56,8 @@ integrity="sha256-EKclUXH9SRRUv3FmL7bIEV0z2s3EvzHFxzHKCnfHT_E"></script>
   }
 
   test(function() {
-    return assert_true(loads_scripts_with_correct_content_type)
-  }, "Loads scripts with correct content type");
-
-  test(function() {
     return assert_undefined(loads_scripts_with_improper_integrity_uri_scheme)
   }, "Doesn't load scripts with improper integrity URI scheme");
-
-  test(function() {
-    return assert_undefined(loads_scripts_with_incorrect_content_type)
-  }, "Doesn't load scripts with incorrect content-type");
 
   test(function() {
     return assert_true(loads_scripts_with_matching_digest)
