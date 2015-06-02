@@ -4,17 +4,17 @@
 <div id="log"></div>
 
 <script>
-  var loads_scripts_with_improper_integrity_uri_scheme;
+  var loads_scripts_with_unknown_hash_function;
   var loads_scripts_with_matching_digest;
   var loads_scripts_with_multiple_digests_and_one_is_wrong;
   var loads_scripts_with_non_matching_digest;
   var loads_scripts_with_weak_digest_algorithms;
   var loads_scripts_with_base64_encoded_sha_digests;
-  var loads_scripts_with_unhyphenated_digest_name;
+  var loads_scripts_with_hyphenated_digest_name;
 </script>
 
-<!-- Should load because the algorithm is unknown, but potentially with a console error -->
-<script src="loads-scripts-with-improper-integrity-uri-scheme.js" integrity="shaa256-J9PNsSFLX168LnQhGZeryaLZDmTLy_fMdx4pO-LhjW4"></script>
+<!-- Should load even though the algorithm is unknown/weak, but potentially with a console error -->
+<script src="loads-scripts-with-unknown-hash-function.js" integrity="sha1-CBPcM1CY0RCGLDEql4LRAtJb2bY="></script>
 
 <!-- Should load -->
 <script src="loads-scripts-with-matching-digest.js"
@@ -26,14 +26,11 @@ integrity="sha256-EKclUXH9SRRUv3FmL7bIEV0z2s3EvzHFxzHKCnfHT_E"></script>
 <!-- Shouldn't load. Correct hash is sha256-mmx3g0H5KnIi_lnkuMJzYK7q6ss-Wnp-7zoGvgiQVtU -->
 <script src="loads-scripts-with-non-matching-digest.js" integrity="sha256-EKclUXH9SRRUv3FmL7bIEV0z2s3EvzHFxzHKCnfHT_E"></script>
 
-<!-- Should load because the algorithm is unknown/weak, but potentially with a console error -->
-<script src="loads-scripts-with-weak-digest-algorithms.js" integrity="md5-XHzXKrCo5jhDN4BvNhs-4A"></script>
-
 <!-- Should load -->
 <script src="loads-scripts-with-base64-encoded-sha-digests.js" integrity="sha256-+xc7GxEqWw6VtSIsI5W90RQtOrfjeGD+6WFgxZgiuOw="></script>
 
 <!-- Should load -->
-<script src="loads-scripts-with-unhyphenated-digest-name.js" integrity="sha-256-ZR6E3E_G_B3WNdop4bYFtnXaj5bH02S3znD__KOC8Io"></script>
+<script src="loads-scripts-with-hyphenated-digest-name.js" integrity="sha-256-j83D7Rz6NSyzh/lT8Bowczi1ArdIRyKPia4Xi8nhIH4="></script>
 
 <script>
   assert_true = function assert_true(value) {
@@ -56,8 +53,8 @@ integrity="sha256-EKclUXH9SRRUv3FmL7bIEV0z2s3EvzHFxzHKCnfHT_E"></script>
   }
 
   test(function() {
-    return assert_undefined(loads_scripts_with_improper_integrity_uri_scheme)
-  }, "Doesn't load scripts with improper integrity URI scheme");
+    return assert_true(loads_scripts_with_unknown_hash_function)
+  }, "Loads scripts with unknown hash functions");
 
   test(function() {
     return assert_true(loads_scripts_with_matching_digest)
@@ -72,14 +69,10 @@ integrity="sha256-EKclUXH9SRRUv3FmL7bIEV0z2s3EvzHFxzHKCnfHT_E"></script>
   }, "Doesn't load scripts with non-matching digest");
 
   test(function() {
-    return assert_undefined(loads_scripts_with_weak_digest_algorithms)
-  }, "Doesn't load scripts using weak digest algorithm");
-
-  test(function() {
     return assert_true(loads_scripts_with_base64_encoded_sha_digests)
   }, "Loads scripts with base64 encoded sha digests");
 
   test(function() {
-    return assert_true(loads_scripts_with_unhyphenated_digest_name)
-  }, "Loads scripts with unhyphenated digest names");
+    return assert_true(loads_scripts_with_hyphenated_digest_name)
+  }, "Loads scripts with hyphenated digest names");
 </script>

@@ -1,0 +1,1 @@
+loads_scripts_with_unknown_hash_function=true;

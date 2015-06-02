@@ -1,0 +1,1 @@
+loads_scripts_with_hyphenated_digest_name=true;
